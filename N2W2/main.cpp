@@ -161,6 +161,9 @@ void train(NeuralNetwork& net ,int funcNum = 500, int maxDegree = 3, unsigned lo
 	double alphaCon = 1.0 - Neuron::beta;
 	double etaCon = 0.9;
 
+
+	
+
 	cout << "generating functions" << endl;
 	generateRandomFuncs(funcs, maxDegree, funcNum , verbose);
 	cout << "func gen finished" << endl;
@@ -168,6 +171,8 @@ void train(NeuralNetwork& net ,int funcNum = 500, int maxDegree = 3, unsigned lo
 	std::uniform_int_distribution<int> arand(0, funcs.size() - 1);
 
 	int goalPercent = maxIter * logPercent;
+	NeuralNetwork::m_averageSmoothFactor = 1.0 - logPercent;
+
 	unsigned long long iter = 0;
 
 	vector<double> inputVals, targetVals;
@@ -224,7 +229,7 @@ void mainDegrees()
 	NeuralNetwork net({ 20 ,30, 4 });
 
 
-	auto fileName = "20-30-4_d_i30m_f100k-eta(6e-7)-alpha(0.995)-x1.model";
+	auto fileName = "20-30-4_d_i30m_f100k-eta(6e-7)-alpha(0.995)-x2.model";
 	
 	
 	bool trainOpt = true;
