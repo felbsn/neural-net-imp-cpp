@@ -19,8 +19,8 @@ class NeuralNetwork
 public:
 	NeuralNetwork(const vector<unsigned> &topology);
 	NeuralNetwork();
-	void feedForward(const vector<double> &inputVals);
-	void backProp(const vector<double> &targetVals);
+	void forward(const vector<double> &inputVals);
+	void backward(const vector<double> &targetVals);
 	void getResults(vector<double> &resultVals) const;
 	double getRecentAverageError(void) const { return m_recentAverageError; }
 

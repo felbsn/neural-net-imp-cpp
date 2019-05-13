@@ -22,7 +22,7 @@ public:
 	void getTargetValues(vector<double>& inputs, double normMax = 0) const;
 
 
-	int getDegree() const { return multipleer.size() - 1; }
+	int backward() const { return multipleer.size() - 1; }
 	double getMultipleer(int at) const { return multipleer[at]; }
 	double getMaxMultipleer() const;
 

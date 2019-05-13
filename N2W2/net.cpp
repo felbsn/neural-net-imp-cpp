@@ -164,7 +164,7 @@ void NeuralNetwork::load(const char * file)
 	myfile.close();
 }
 
-void NeuralNetwork::backProp(const vector<double> &targetVals)
+void NeuralNetwork::backward(const vector<double> &targetVals)
 {
 	// Calculate overall net error (RMS of output neuron errors)
 
@@ -221,7 +221,7 @@ void NeuralNetwork::backProp(const vector<double> &targetVals)
 	}
 }
 
-void NeuralNetwork::feedForward(const vector<double> &inputVals)
+void NeuralNetwork::forward(const vector<double> &inputVals)
 {
 	if (inputVals.size() != m_layers[0].size() - 1)
 	{

@@ -11,7 +11,7 @@ void Neuron::updateInputWeights(Layer &prevLayer)
 
 		double newDeltaWeight =
 		// training rate                             momentum 
-			eta* neuron.getOutputVal()* m_gradient + alpha* oldDeltaWeight;
+			eta* neuron.getOutputVal()* m_gradient + beta* oldDeltaWeight;
 
 		neuron.m_outputWeights[m_index].deltaWeight = newDeltaWeight;
 		neuron.m_outputWeights[m_index].weight += newDeltaWeight;

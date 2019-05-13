@@ -35,7 +35,7 @@ public:
 
 
 	static double eta;
-	static double alpha;
+	static double beta;
 
 	vector<Connection> m_outputWeights;
 	unsigned m_index;
