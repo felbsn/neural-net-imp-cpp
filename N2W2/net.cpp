@@ -42,8 +42,12 @@ void NeuralNetwork::save(const char * file) const
 {
 	log("writing " << file);
 	auto myfile = std::fstream(file, std::ios::out | std::ios::binary);
-	int topologySize = m_layers.size();
 
+	myfile.write((char*)&m_recentAverageError, sizeof(double));
+
+
+
+	int topologySize = m_layers.size();
 	myfile.write( (char*)&topologySize ,  sizeof(int));
 	log("top size " << topologySize);
 	for (size_t i = 0; i < m_layers.size(); i++)
@@ -103,12 +107,19 @@ void NeuralNetwork::load(const char * file)
 {
 	log("reading " << file);
 	auto myfile = std::fstream(file, std::ios::in | std::ios::binary);
-	int topologySize;
 
+	myfile.read((char*)&m_recentAverageError, sizeof(double));
+
+
+	int topologySize;
 	myfile.read((char*)&topologySize, sizeof(int));
 
 	m_layers.resize(topologySize);
 	log("readed top size " << topologySize);
+
+
+
+	
 
 	for (size_t i = 0; i < m_layers.size(); i++)
 	{

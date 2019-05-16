@@ -7,14 +7,11 @@
 #include <cmath>
 #include <fstream>
 #include <sstream>
-
 #include <random>
 #include <chrono>
 #include <ctime>
-
 #include "neuron.h"
 #include "net.h"
-
 #include "function.h"
 
 // default eta , beta
@@ -37,6 +34,9 @@ ostream& operator<<(ostream& os, const Function& func)
 		else
 			os << " ";
 
+		if(i == func.multipleer.size()-1)
+			os << "(" << func.multipleer[i] <<  ")";
+		else
 		os  << "("<< func.multipleer[i] << "x^" << func.multipleer.size()-1 - i << ")";
 	}
 	return os;
@@ -225,11 +225,14 @@ void mainDegrees()
 {
 	Neuron::eta = 0.0000001;
 	Neuron::eta = 0.0000171;
-	Neuron::beta = 0.995;
+	Neuron::beta = 0.997;
 	NeuralNetwork net({ 20 ,30, 4 });
 
 
-	auto fileName = "20-30-4_d_i30m_f100k-eta(6e-7)-alpha(0.995)-x2.model";
+	
+
+
+	auto fileName = "20-30-4_d_i8m_f100k-eta(1.7e-5)-alpha(0.997)-x4.model";
 	
 	
 	bool trainOpt = true;
@@ -249,23 +252,25 @@ void mainDegrees()
 		std::time_t end_time = std::chrono::system_clock::to_time_t(end);
 
 		std::cout << "train finished " << std::ctime(&end_time) << "elapsed time: " << elapsed_seconds.count() << "s\n";
-	
+
+		cout << " avg " << net.getRecentAverageError() << " eta:" << Neuron::eta << " alpha:" << Neuron::beta << endl;
+		net.printTopology();
 		net.save(fileName);
 	}
 	else
 	{
 		net.load(fileName);
+		std::cout << "model loaded " << endl;
+		cout << " avg " << net.getRecentAverageError() << " eta:" << Neuron::eta << " alpha:" << Neuron::beta << endl;
+		net.printTopology();
 	}
-
-    
-	//net.load("20-16-10-3x.model");
 
 	cout << "3. derece" << endl;
 
-	predictFunctionDegree(net, {6, 4,3,4 } ,3);
-	predictFunctionDegree(net, { 2,1,6,4 },3);
+	predictFunctionDegree(net, {-20, 0,0,15 } ,14);
+	predictFunctionDegree(net, { 2,1,6,4 },21);
 	predictFunctionDegree(net, { -4,2,-2,10 },3);
-	predictFunctionDegree(net, { 1,0,9,3 },3);
+	predictFunctionDegree(net, { 1,0,9, -13 },3);
 
 	cout << "2. derece" << endl;
 
@@ -288,7 +293,7 @@ void mainDegrees()
 
 int main()
 {
-
+	system("color 0b");
 
 	mainDegrees();
 

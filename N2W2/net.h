@@ -24,6 +24,18 @@ public:
 	void getResults(vector<double> &resultVals) const;
 	double getRecentAverageError(void) const { return m_recentAverageError; }
 
+	void printTopology()
+	{
+		cout << "Topology ->" << endl;
+
+		for (size_t i = 0; i < m_layers.size(); i++)
+		{
+			cout << m_layers[i].size() - 1 << endl;
+		}
+
+		cout << "____" << endl;
+	}
+
 	void comp(NeuralNetwork & other);
 
 	void save(const char * file) const;
